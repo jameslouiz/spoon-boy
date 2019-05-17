@@ -172,14 +172,26 @@ describe("Matrix Class", () => {
         const rows = 4;
         const fill = 100;
         const matrix = new Matrix(rows, cols, fill);
-        const asArray = toArray(matrix.data);
 
         matrix.randomize();
 
-        expect(toArray(matrix.data)).toHaveLength(cols * rows);
-        toArray(matrix.data).forEach(n => {
+        matrix.data.forEach(n => {
           expect(n).not.toBe(fill);
         });
+      });
+    });
+
+    describe("Transpose", () => {
+      it("Should transpose matrix", () => {
+        const cols = 4;
+        const rows = 2;
+        const matrix = new Matrix(rows, cols);
+
+        matrix.map((a, b, c, d) => d);
+        matrix.transpose();
+
+        expect(matrix.data).toHaveLength(cols);
+        expect(matrix.data[0]).toHaveLength(rows);
       });
     });
   });
