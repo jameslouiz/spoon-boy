@@ -25,6 +25,17 @@ describe("Matrix Class", () => {
     expect(matrix.data[0]).toHaveLength(cols);
   });
 
+  it("Should create a matrix fill with the correct values", () => {
+    const cols = 4;
+    const rows = 5;
+    const fill = 100;
+    const matrix = new Matrix(rows, cols, fill);
+
+    toArray(matrix.data).forEach(n => {
+      expect(n).toBe(fill);
+    });
+  });
+
   describe("Scalar operations", () => {
     describe("Add", () => {
       it("Should perform scalar add to matrix", () => {
@@ -152,6 +163,23 @@ describe("Matrix Class", () => {
         const fn = () => matrix.map(muliplier);
 
         expect(fn).toThrow();
+      });
+    });
+
+    describe("Random", () => {
+      it("Should replace all values in the matrix with random values", () => {
+        const cols = 4;
+        const rows = 4;
+        const fill = 100;
+        const matrix = new Matrix(rows, cols, fill);
+        const asArray = toArray(matrix.data);
+
+        matrix.randomize();
+
+        expect(toArray(matrix.data)).toHaveLength(cols * rows);
+        toArray(matrix.data).forEach(n => {
+          expect(n).not.toBe(fill);
+        });
       });
     });
   });

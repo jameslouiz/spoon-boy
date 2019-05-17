@@ -1,5 +1,5 @@
-const buildMatrix = (rows = 2, cols = 2) => {
-  return Array(rows).fill(Array(cols).fill(0));
+const buildMatrix = (rows = 2, cols = 2, fill) => {
+  return Array(rows).fill(Array(cols).fill(fill));
 };
 
 const isFunction = functionToCheck => {
@@ -8,17 +8,15 @@ const isFunction = functionToCheck => {
   );
 };
 
-const isNaNGuard = n => {
-  if (isNaN(n)) {
-    throw new Error(`${n} is not a number`);
-  }
+const randomize = (rows = 2, cols = 2) => {
+  return Array(rows).fill(Array.from({ length: cols }, Math.random));
 };
 
 class Matrix {
-  constructor(rows = 2, cols = 2) {
+  constructor(rows = 2, cols = 2, fill = 0) {
     this.cols = cols;
     this.rows = rows;
-    this.data = buildMatrix(rows, cols);
+    this.data = buildMatrix(rows, cols, fill);
     this.size = cols * rows;
   }
 
@@ -154,7 +152,7 @@ class Matrix {
   }
 
   randomize() {
-    this.data = randomize(this.data);
+    this.data = randomize(this.rows, this.cols);
   }
 
   add(n) {
