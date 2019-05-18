@@ -8,10 +8,6 @@ const isFunction = functionToCheck => {
   );
 };
 
-const randomize = (rows = 2, cols = 2) => {
-  return Array(rows).fill(Array.from({ length: cols }, Math.random));
-};
-
 class Matrix {
   constructor(rows = 2, cols = 2, fill = 0) {
     this.cols = cols;
@@ -151,8 +147,14 @@ class Matrix {
     return c;
   }
 
+  static fromArray(arr) {
+    const matrix = new Matrix(1, arr.length);
+    matrix.map((a, b, c) => arr[c]);
+    return matrix;
+  }
+
   randomize() {
-    this.data = randomize(this.rows, this.cols);
+    this.map(Math.random);
   }
 
   add(n) {
@@ -211,5 +213,4 @@ class Matrix {
     );
   }
 }
-
-export default Matrix;
+module.exports = Matrix;
