@@ -106,7 +106,7 @@ class Matrix {
     const bMatrix = b.data;
 
     c.map((value, i, j) => {
-      return aMatrix[i][j] * bMatrix[i][j];
+      return aMatrix[i][j] * bMatrix[j][i];
     });
 
     return c;
@@ -213,4 +213,5 @@ class Matrix {
     );
   }
 }
+
 module.exports = Matrix;
